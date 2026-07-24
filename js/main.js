@@ -1,5 +1,5 @@
 // ==========================================
-// DYNAMIC PORTFOLIO PROJECTS ENGINE
+// DYNAMIC PORTFOLIO PROJECTS & SERVICES ENGINE
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +42,6 @@ function handleCategoryTap(catKey) {
     const category = projectsData[catKey];
     if (!category || !category.items || category.items.length === 0) return;
 
-    // If category has 1 primary GitHub tool, open it directly in a new tab
     if (category.items.length === 1 && category.items[0].link) {
         const url = category.items[0].link;
         if (url.startsWith('http')) {
@@ -51,7 +50,6 @@ function handleCategoryTap(catKey) {
             window.location.href = url;
         }
     } else {
-        // If category has multiple tools, open the modal popup
         openCategoryModal(catKey);
     }
 }
@@ -125,3 +123,143 @@ function closeCategoryModal() {
 }
 
 function initProjectModal() {}
+
+// ==========================================
+// INTERACTIVE SERVICES DETAIL MODAL ENGINE
+// ==========================================
+
+function openServiceDetailModal(serviceKey) {
+    if (typeof servicesData === 'undefined') {
+        console.error("servicesData is missing. Ensure servicesData.js is loaded.");
+        return;
+    }
+
+    const service = servicesData[serviceKey];
+    if (!service) return;
+
+    let modal = document.getElementById('serviceDetailModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'serviceDetailModal';
+        modal.className = 'modal-overlay';
+        modal.style.cssText = `
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px);
+            z-index: 2500; display: flex; align-items: center; justify-content: center; padding: 20px;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // Build How I Perform list
+    let stepsHtml = '';
+    service.howIPerform.forEach(item => {
+        stepsHtml += `
+            <div style="background: #121212; border-left: 3px solid var(--accent-primary, #FF4D00); border-radius: 8px; padding: 14px 18px; margin-bottom: 12px;">
+                <h5 style="color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">${item.step}</h5>
+                <p style="color: #CCCCCC; font-size: 0.88rem; margin: 0; line-height: 1.5;">${item.desc}</p>
+            </div>
+        `;
+    });
+
+    // Build Requirements list
+    let reqsHtml = '';
+    service.requirements.forEach(req => {
+        reqsHtml += `
+            <li style="margin-bottom: 8px; font-size: 0.9rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fa-solid fa-square-check" style="color: var(--accent-primary, #FF4D00); margin-top: 3px; font-size: 0.95rem;"></i>
+                <span>${req}</span>
+            </li>
+        `;
+    });
+
+    // Build Deliverables list
+    let delivHtml = '';
+    service.deliverables.forEach(d => {
+        delivHtml += `
+            <li style="margin-bottom: 8px; font-size: 0.9rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fa-solid fa-circle-check" style="color: #00E676; margin-top: 3px; font-size: 0.95rem;"></i>
+                <span>${d}</span>
+            </li>
+        `;
+    });
+
+    // Tools badges
+    let toolsHtml = '';
+    service.tools.forEach(t => {
+        toolsHtml += `<span style="background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border: 1px solid rgba(255, 77, 0, 0.3); padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin-right: 6px; margin-bottom: 6px;">${t}</span>`;
+    });
+
+    const isServicesPage = window.location.pathname.includes('services.html');
+    const contactHref = isServicesPage ? 'index.html#contact' : '#contact';
+
+    modal.innerHTML = `
+        <div style="background: #181818; border: 1px solid var(--accent-primary, #FF4D00); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px; border-radius: 20px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9);">
+            <button onclick="closeServiceDetailModal()" style="position: absolute; top: 16px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;" aria-label="Close Modal">&times;</button>
+            
+            <!-- Header -->
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                <div style="width: 52px; height: 52px; background: rgba(255, 77, 0, 0.15); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
+                    <i class="${service.icon}"></i>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #FFFFFF; margin: 0;">${service.title}</h3>
+                    <p style="color: #9E9E9E; font-size: 0.88rem; margin-top: 4px; margin-bottom: 0;">Service Specifications &amp; Scope</p>
+                </div>
+            </div>
+
+            <p style="color: #DDDDDD; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #282828;">${service.summary}</p>
+
+            <!-- Section 1: How I Perform -->
+            <div style="margin-bottom: 24px;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-gears" style="color: var(--accent-primary, #FF4D00);"></i> How I Perform
+                </h4>
+                <div>${stepsHtml}</div>
+            </div>
+
+            <!-- Section 2: Requirements -->
+            <div style="margin-bottom: 24px; background: #121212; padding: 18px 20px; border-radius: 12px; border: 1px solid #282828;">
+                <h4 style="color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-list-check" style="color: var(--accent-primary, #FF4D00);"></i> Prerequisites &amp; Requirements
+                </h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">${reqsHtml}</ul>
+            </div>
+
+            <!-- Section 3: Deliverables -->
+            <div style="margin-bottom: 24px; background: #121212; padding: 18px 20px; border-radius: 12px; border: 1px solid #282828;">
+                <h4 style="color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-box-open" style="color: #00E676;"></i> Deliverables Provided
+                </h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">${delivHtml}</ul>
+            </div>
+
+            <!-- Section 4: Tools -->
+            <div style="margin-bottom: 28px;">
+                <h4 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 10px;">Tools &amp; Frameworks Utilized:</h4>
+                <div>${toolsHtml}</div>
+            </div>
+
+            <!-- CTA Button -->
+            <div style="text-align: center; border-top: 1px solid #282828; padding-top: 20px;">
+                <a href="${contactHref}" onclick="closeServiceDetailModal()" style="display: inline-flex; align-items: center; gap: 10px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 800; font-size: 0.95rem; padding: 12px 28px; border-radius: 999px; text-decoration: none;">
+                    Request Service / Contact Me <i class="fa-solid fa-paper-plane"></i>
+                </a>
+            </div>
+        </div>
+    `;
+
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'all';
+
+    modal.onclick = (e) => {
+        if (e.target === modal) closeServiceDetailModal();
+    };
+}
+
+function closeServiceDetailModal() {
+    const modal = document.getElementById('serviceDetailModal');
+    if (modal) {
+        modal.style.opacity = '0';
+        modal.style.pointerEvents = 'none';
+    }
+}

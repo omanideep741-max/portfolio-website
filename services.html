@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <title>Services | Manideep Reddy</title>
+    <script>window.location.replace("index.html#services");</script>
 </head>
 <body>
 
@@ -18,7 +19,7 @@
     <div class="nav-container">
         <!-- Logo links to Home -->
         <a href="index.html#header" class="nav-logo" aria-label="Go to home">
-            <img src="assets/logo.png" alt="MR Logo" class="nav-logo-img">
+            <span class="nav-logo-text">Manideep<span class="nav-logo-dot">.</span></span>
         </a>
         <ul id="sidemenu">
             <li><a href="index.html#header">Home</a></li>
@@ -44,24 +45,36 @@
 <!-- ============ SERVICES SECTION ============ -->
 <section id="services-page" style="padding: 40px 0 100px;">
     <div class="container">
-        <div class="services-list">
-            <div class="service-card">
-                <i class="fa-solid fa-shield-halved service-icon" aria-hidden="true"></i>
-                <h3>Penetration Testing</h3>
-                <p>Simulating real-world attacks to identify vulnerabilities in web applications before malicious actors can find and exploit them. I utilize industry methodologies to perform thorough testing of web forms, API endpoints, and authentication systems.</p>
-                <a href="index.html#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <div class="services-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('web_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Web Application Penetration Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Simulating real-world attacks to identify vulnerabilities in web applications before malicious actors can find and exploit them. I utilize industry methodologies to perform thorough testing of web forms, API endpoints, and authentication systems.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="fa-solid fa-magnifying-glass service-icon" aria-hidden="true"></i>
-                <h3>Vulnerability Assessment</h3>
-                <p>Systematic scanning, analysis, and documentation of security weaknesses. This involves using automated tools like Burp Suite Scanner and OWASP ZAP, coupled with manual verification to filter out false positives and determine real impact.</p>
-                <a href="index.html#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('network_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Network Penetration Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Systematic scanning, analysis, and documentation of security weaknesses in network infrastructure, open ports, firewall rules, and obsolete service versions.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="fa-solid fa-file-shield service-icon" aria-hidden="true"></i>
-                <h3>Security Research & Reporting</h3>
-                <p>Writing clear, structured vulnerability reports. Each report includes an executive summary, detailed description of findings, step-by-step proof-of-concepts, CVSS risk ratings, and actionable remediation advice matching OWASP recommendations.</p>
-                <a href="index.html#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('mobile_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Mobile Application Security Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Assessing mobile application binaries (APK/IPA), traffic interception, local storage encryption, and backend API endpoints for comprehensive protection.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -110,5 +123,7 @@
         link.addEventListener('click', closemenu);
     });
 </script>
+<script src="js/servicesData.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -785,16 +785,19 @@ footer.copyright {
 /* ------------ Responsive Navbar & Media Queries ------------ */
 @media (max-width: 992px) {
     .about-top-row {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 30px;
     }
     .about-photo-wrap {
-        margin-top: 24px;
+        order: -1; /* Places photo BEFORE About Me text on mobile screens */
+        margin-top: 0;
+        margin-bottom: 10px;
         display: flex;
         justify-content: center;
     }
     .about-photo-box {
-        max-width: 280px;
+        max-width: 260px;
     }
     .row {
         grid-template-columns: 1fr;

@@ -188,31 +188,42 @@
 <section id="services">
     <div class="container">
         <h2 class="sub-title">Services</h2>
-        <div class="services-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        <div class="services-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
 
-            <div class="service-card">
-                <i class="fa-solid fa-network-wired service-icon" aria-hidden="true"></i>
-                <h3>Network Penetration Testing</h3>
-                <p>Enumerating network infrastructure, open ports, outdated service versions, and identifying security weaknesses to prevent network breaches.</p>
-                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('network_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Network Penetration Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Enumerating network infrastructure, open ports, outdated service versions, and identifying security weaknesses to prevent network breaches.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
 
-            <div class="service-card">
-                <i class="fa-solid fa-shield-halved service-icon" aria-hidden="true"></i>
-                <h3>Web Application Penetration Testing</h3>
-                <p>Auditing web applications against OWASP Top 10 risks including SQL Injection, XSS, CSRF, IDOR, and Broken Authentication flaws.</p>
-                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('web_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Web Application Penetration Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Auditing web applications against OWASP Top 10 risks including SQL Injection, XSS, CSRF, IDOR, and Broken Authentication flaws.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
 
-            <div class="service-card">
-                <i class="fa-solid fa-mobile-screen-button service-icon" aria-hidden="true"></i>
-                <h3>Mobile Application Security Testing</h3>
-                <p>Assessing mobile application traffic, API endpoints, storage security, and authentication mechanisms to ensure robust mobile protection.</p>
-                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="service-card project-block-card" onclick="openServiceDetailModal('mobile_vapt')" style="background: var(--bg-card); border: 1px solid var(--border-color, #242424); border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main, #FFFFFF);">Mobile Application Security Testing</h3>
+                <p style="font-size: 0.95rem; color: var(--text-muted, #9E9E9E); margin-bottom: 16px;">Assessing mobile application traffic, API endpoints, storage security, and authentication mechanisms to ensure robust mobile protection.</p>
+                <div style="margin-top: auto; color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px;">
+                    View Scope &amp; How I Perform <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
 
         </div>
-        <a href="services.html" class="btn" style="margin-top: 30px;">See All Services <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 </section>
 
@@ -477,8 +488,9 @@
 </script>
 
 <!-- ============ MODULAR PROJECT SCRIPTS ============ -->
-<!-- Load the data file first, then the main logic script -->
+<!-- Load the data files first, then the main logic script -->
 <script src="js/projectsData.js"></script>
+<script src="js/servicesData.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
