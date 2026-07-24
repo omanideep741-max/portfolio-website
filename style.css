@@ -540,6 +540,8 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     gap: 12px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .contact-item i {
@@ -932,6 +934,37 @@ footer.copyright {
         width: 100% !important;
         max-width: 100vw !important;
         box-sizing: border-box !important;
+    }
+
+    .row {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        width: 100% !important;
+    }
+
+    .contact-left, .contact-right {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    form[name="contact-form"] {
+        padding: 22px 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 14px !important;
+    }
+
+    form[name="contact-form"] input,
+    form[name="contact-form"] textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    .contact-item {
+        font-size: 0.95rem !important;
+        word-break: break-all !important;
     }
 
     .skill-tree-branches, .services-list, #dynamic-category-cards {
