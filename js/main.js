@@ -151,9 +151,9 @@ function openServiceDetailModal(serviceKey) {
     let stepsHtml = '';
     service.howIPerform.forEach(item => {
         stepsHtml += `
-            <div style="background: #121212; border-left: 3px solid var(--accent-primary, #FF4D00); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px;">
-                <h5 style="color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.9rem; margin-bottom: 4px;">${item.step}</h5>
-                <p style="color: #CCCCCC; font-size: 0.85rem; margin: 0; line-height: 1.5;">${item.desc}</p>
+            <div style="background: #121212; border-left: 3px solid var(--accent-primary, #FF4D00); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; box-sizing: border-box; width: 100%; word-break: break-word; overflow-wrap: anywhere;">
+                <h5 style="color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; word-break: break-word; overflow-wrap: anywhere;">${item.step}</h5>
+                <p style="color: #CCCCCC; font-size: 0.85rem; margin: 0; line-height: 1.5; word-break: break-word; overflow-wrap: anywhere;">${item.desc}</p>
             </div>
         `;
     });
@@ -162,9 +162,9 @@ function openServiceDetailModal(serviceKey) {
     let reqsHtml = '';
     service.requirements.forEach(req => {
         reqsHtml += `
-            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;">
+            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; box-sizing: border-box; width: 100%; word-break: break-word; overflow-wrap: anywhere;">
                 <i class="fa-solid fa-square-check" style="color: var(--accent-primary, #FF4D00); margin-top: 2px; font-size: 0.9rem; flex-shrink: 0;"></i>
-                <span>${req}</span>
+                <span style="word-break: break-word; overflow-wrap: anywhere; width: 100%;">${req}</span>
             </li>
         `;
     });
@@ -173,9 +173,9 @@ function openServiceDetailModal(serviceKey) {
     let delivHtml = '';
     service.deliverables.forEach(d => {
         delivHtml += `
-            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;">
+            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; box-sizing: border-box; width: 100%; word-break: break-word; overflow-wrap: anywhere;">
                 <i class="fa-solid fa-circle-check" style="color: #00E676; margin-top: 2px; font-size: 0.9rem; flex-shrink: 0;"></i>
-                <span>${d}</span>
+                <span style="word-break: break-word; overflow-wrap: anywhere; width: 100%;">${d}</span>
             </li>
         `;
     });
@@ -183,61 +183,61 @@ function openServiceDetailModal(serviceKey) {
     // Tools badges
     let toolsHtml = '';
     service.tools.forEach(t => {
-        toolsHtml += `<span style="background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border: 1px solid rgba(255, 77, 0, 0.3); padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; display: inline-block; margin-right: 6px; margin-bottom: 6px;">${t}</span>`;
+        toolsHtml += `<span style="background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border: 1px solid rgba(255, 77, 0, 0.3); padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; display: inline-block; margin-right: 6px; margin-bottom: 6px; word-break: break-word;">${t}</span>`;
     });
 
     const contactHref = '#contact';
 
     modal.innerHTML = `
-        <div class="modal-content-box">
+        <div class="modal-content-box" style="box-sizing: border-box; width: 100%; word-break: break-word; overflow-wrap: anywhere;">
             <button onclick="closeServiceDetailModal(true)" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.08); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;" aria-label="Close Modal">&times;</button>
             
             <!-- Header -->
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-right: 32px;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-right: 32px; box-sizing: border-box; width: 100%;">
                 <div style="width: 48px; height: 48px; background: rgba(255, 77, 0, 0.15); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;">
                     <i class="${service.icon}"></i>
                 </div>
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 0; line-height: 1.3;">${service.title}</h3>
+                <div style="box-sizing: border-box; width: 100%;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 0; line-height: 1.3; word-break: break-word; overflow-wrap: anywhere;">${service.title}</h3>
                     <p style="color: #9E9E9E; font-size: 0.82rem; margin-top: 2px; margin-bottom: 0;">Scope &amp; Methodology Specifications</p>
                 </div>
             </div>
 
-            <p style="color: #DDDDDD; font-size: 0.9rem; line-height: 1.55; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #282828;">${service.summary}</p>
+            <p style="color: #DDDDDD; font-size: 0.9rem; line-height: 1.55; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #282828; word-break: break-word; overflow-wrap: anywhere;">${service.summary}</p>
 
             <!-- Section 1: How I Perform -->
-            <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 20px; box-sizing: border-box; width: 100%;">
                 <h4 style="color: #FFFFFF; font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-gears" style="color: var(--accent-primary, #FF4D00);"></i> How I Perform
                 </h4>
-                <div>${stepsHtml}</div>
+                <div style="box-sizing: border-box; width: 100%;">${stepsHtml}</div>
             </div>
 
             <!-- Section 2: Requirements -->
-            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828;">
+            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828; box-sizing: border-box; width: 100%;">
                 <h4 style="color: #FFFFFF; font-size: 0.98rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-list-check" style="color: var(--accent-primary, #FF4D00);"></i> Prerequisites &amp; Requirements
                 </h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">${reqsHtml}</ul>
+                <ul style="list-style: none; padding: 0; margin: 0; box-sizing: border-box; width: 100%;">${reqsHtml}</ul>
             </div>
 
             <!-- Section 3: Deliverables -->
-            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828;">
+            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828; box-sizing: border-box; width: 100%;">
                 <h4 style="color: #FFFFFF; font-size: 0.98rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-box-open" style="color: #00E676;"></i> Deliverables Provided
                 </h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">${delivHtml}</ul>
+                <ul style="list-style: none; padding: 0; margin: 0; box-sizing: border-box; width: 100%;">${delivHtml}</ul>
             </div>
 
             <!-- Section 4: Tools -->
-            <div style="margin-bottom: 22px;">
+            <div style="margin-bottom: 22px; box-sizing: border-box; width: 100%;">
                 <h4 style="color: #FFFFFF; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">Tools &amp; Frameworks Utilized:</h4>
-                <div>${toolsHtml}</div>
+                <div style="box-sizing: border-box; width: 100%;">${toolsHtml}</div>
             </div>
 
             <!-- CTA Button -->
-            <div style="text-align: center; border-top: 1px solid #282828; padding-top: 16px;">
-                <a href="${contactHref}" onclick="closeServiceDetailModal(true)" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 800; font-size: 0.9rem; padding: 12px 24px; border-radius: 999px; text-decoration: none; width: 100%; max-width: 320px;">
+            <div style="text-align: center; border-top: 1px solid #282828; padding-top: 16px; box-sizing: border-box; width: 100%;">
+                <a href="${contactHref}" onclick="closeServiceDetailModal(true)" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 800; font-size: 0.9rem; padding: 12px 24px; border-radius: 999px; text-decoration: none; width: 100%; max-width: 320px; box-sizing: border-box;">
                     Request Service / Contact Me <i class="fa-solid fa-paper-plane"></i>
                 </a>
             </div>
