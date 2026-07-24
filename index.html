@@ -244,14 +244,12 @@
                 <a href="Manideep_Reddy_Resume.html" target="_blank" class="btn btn-primary" style="margin-top: 35px; display: inline-block;">View Resume <i class="fa-solid fa-file-lines" aria-hidden="true"></i></a>
             </div>
             <div class="contact-right">
-                <form action="https://api.web3forms.com/submit" method="POST" name="contact-form" autocomplete="off">
-                    <input type="hidden" name="access_key" value="c3b8d5ac-7731-42cd-883f-e6e0af3a45a0">
-                    <input type="hidden" name="subject" value="New Portfolio Message from Visitor">
-                    <input type="hidden" name="from_name" value="Cybersecurity Portfolio">
+                <form action="https://formspree.io/f/xbdnzvwa" method="POST" name="contact-form" id="contact-form" autocomplete="off">
                     <input type="text" name="name" id="name" placeholder="Enter name" required maxlength="100">
                     <input type="email" name="email" id="email" placeholder="Enter email" required maxlength="150">
                     <textarea name="message" id="message" rows="6" placeholder="Type message" required maxlength="2000"></textarea>
                     <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+                    <div id="form-status" style="margin-top: 14px; font-weight: 600; font-size: 0.9rem; text-align: center;"></div>
                 </form>
             </div>
         </div>
@@ -429,6 +427,60 @@
             }
         });
     });
+
+    // Formspree Contact Form Handler (GitHub Pages Video Tutorial Standard)
+    const formspreeForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (formspreeForm) {
+        formspreeForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const actionUrl = formspreeForm.action;
+            const submitBtn = document.getElementById('submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+            if (formStatus) {
+                formStatus.style.color = '#9E9E9E';
+                formStatus.innerHTML = 'Sending message...';
+            }
+
+            try {
+                const response = await fetch(actionUrl, {
+                    method: 'POST',
+                    body: new FormData(formspreeForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+
+                if (response.ok) {
+                    if (formStatus) {
+                        formStatus.style.color = '#00E676';
+                        formStatus.innerHTML = 'Thank you! Your message has been sent successfully.';
+                    } else alert('Thank you! Your message has been sent successfully.');
+                    formspreeForm.reset();
+                } else {
+                    const data = await response.json();
+                    if (formStatus) {
+                        formStatus.style.color = '#FF4D00';
+                        formStatus.innerHTML = (data.errors ? data.errors.map(err => err.message).join(', ') : 'Form submission failed.');
+                    } else alert('Oops! Form submission failed.');
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                if (formStatus) {
+                    formStatus.style.color = '#FF4D00';
+                    formStatus.innerHTML = 'Network error. Opening email app...';
+                }
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+                window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+            }
+        });
+    }
 </script>
 
 <!-- ============ MODULAR PROJECT SCRIPTS ============ -->
