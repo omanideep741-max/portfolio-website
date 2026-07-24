@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manideep Reddy | Web Application Security & Penetration Testing Portfolio — Seeking Cybersecurity Internship">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="no-referrer">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Manideep Reddy | Cybersecurity Portfolio</title>
+</head>
+<body>
+
+<!-- ============ STICKY NAV ============ -->
+<nav id="navbar">
+    <div class="nav-container">
+        <!-- Text Logo -->
+        <a href="#header" class="nav-logo" aria-label="Go to top">
+            <span class="nav-logo-text">Manideep<span class="nav-logo-dot">.</span></span>
+        </a>
+
+        <!-- Seamless Blended Menu Icon Button (Full tab / Desktop / Mobile) -->
+        <button class="nav-menu-btn" id="navMenuBtn" onclick="toggleMenu()" aria-label="Toggle Navigation Menu">
+            <i class="fa-solid fa-bars" id="menuBtnIcon"></i>
+        </button>
+
+        <!-- Dropdown Navigation Links -->
+        <ul id="sidemenu">
+            <li><a href="#header" class="nav-item-link active-nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#about" class="nav-item-link"><i class="fa-solid fa-user"></i> About</a></li>
+            <li><a href="#skills-section" class="nav-item-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+            <li><a href="#portfolio" class="nav-item-link"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+            <li><a href="#services" class="nav-item-link"><i class="fa-solid fa-shield-halved"></i> Services</a></li>
+            <li><a href="#contact" class="nav-item-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ============ HERO / HEADER ============ -->
+<div id="header">
+    <div class="container" style="text-align: center;">
+        <div class="header-text" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+            
+            <div class="speech-bubble">Hello, I am</div>
+            
+            <a href="#contact" class="status-badge" style="margin-bottom: 16px; text-decoration: none; cursor: pointer;">
+                <span class="badge-dot"></span>
+                Available for Internship
+            </a>
+            <h1 style="font-size: 3.4rem; font-weight: 900; margin-bottom: 10px;">Hay! I AM <span style="color: var(--accent-primary);">Manideep Reddy</span></h1>
+            <p class="subtitle-desc" style="font-size: 1.35rem; color: var(--accent-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px;">penetrator and web tester</p>
+
+            <p class="tech-tag" id="typing-tag" style="margin-bottom: 24px;"></p>
+
+            <div class="hero-btns" style="display: flex; gap: 16px; justify-content: center; margin-top: 10px;">
+                <a href="Manideep_Reddy_Resume.html" target="_blank" class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ ABOUT ME ============ -->
+<section id="about">
+    <div class="container">
+
+        <!-- TOP ROW: Details on the LEFT | My photo on the RIGHT -->
+        <div class="about-top-row">
+
+            <!-- LEFT COLUMN: Details about me + Phone & Email just below -->
+            <div class="about-intro">
+                <h2 class="sub-title">About Me</h2>
+                <p class="about-text">I am a passionate Cybersecurity enthusiast and Mechanical Engineering student with a strong self-taught foundation in Web Application Security, Penetration Testing, and Vulnerability Assessment. I enjoy identifying system weaknesses through ethical hacking practices, utilizing industry-standard security tools, and gaining practical experience through TryHackMe labs.</p>
+                <p class="about-text" style="margin-top: 12px;">Currently seeking a <strong>Cybersecurity Internship</strong> where I can contribute to real-world security operations and grow alongside experienced security professionals.</p>
+
+                <!-- Phone and Email just below details -->
+                <div class="about-contact-quick" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px;">
+                    <p class="contact-item" style="font-size: 1rem; font-weight: 500;"><i class="fa-solid fa-phone" style="color: var(--accent-primary, #ff4d00); margin-right: 10px;"></i> <strong>Phone:</strong> +91 7993652726</p>
+                    <p class="contact-item" style="font-size: 1rem; font-weight: 500;"><i class="fa-solid fa-envelope" style="color: var(--accent-primary, #ff4d00); margin-right: 10px;"></i> <strong>Email:</strong> omanideep741@gmail.com</p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Photo on the right -->
+            <div class="about-photo-wrap">
+                <img src="assets/user.png" alt="Manideep Reddy profile photo" class="about-photo-box">
+            </div>
+        </div>
+
+        <!-- BOTTOM ROW: Skills / Education / Experience tabs -->
+        <div class="about-tabs-row" id="skills-section" style="margin-top: 50px;">
+            <div class="tab-titles">
+                <p class="tab-links active-link" onclick="opentab(event, 'skills-tab')">Skills</p>
+                <p class="tab-links" onclick="opentab(event, 'education-tab')">Education</p>
+                <p class="tab-links" onclick="opentab(event, 'experience-tab')">Experience</p>
+            </div>
+
+            <!-- Skill Tab: Cyber Skill Tree Diagram -->
+            <div class="tab-contents active-tab" id="skills-tab">
+                <div class="skill-tree-wrapper">
+                    <div class="skill-tree-header">My Skills</div>
+                    <div class="skill-tree-lines"></div>
+
+                    <div class="skill-tree-branches">
+                        <!-- Branch 1: Cyber Security & VAPT -->
+                        <div class="skill-branch">
+                            <div class="skill-branch-title"><i class="fa-solid fa-shield-halved"></i> Cyber Security &amp; VAPT</div>
+                            <div class="skill-pills-grid">
+                                <span class="skill-node-pill" data-tooltip="Identifying, quantifying, and prioritizing security weaknesses in web apps &amp; networks.">Vulnerability Assessment</span>
+                                <span class="skill-node-pill" data-tooltip="Industry awareness standard covering critical web application security risks.">OWASP Top 10</span>
+                                <span class="skill-node-pill" data-tooltip="Attacking database queries by injecting malicious SQL statements into input fields.">SQL Injection</span>
+                                <span class="skill-node-pill" data-tooltip="Cross-Site Scripting: Injecting malicious client-side scripts into web pages.">XSS</span>
+                                <span class="skill-node-pill" data-tooltip="Cross-Site Request Forgery: Forging unauthorized requests from trusted users.">CSRF</span>
+                                <span class="skill-node-pill" data-tooltip="Insecure Direct Object References: Accessing unauthorized objects by changing parameter IDs.">IDOR</span>
+                                <span class="skill-node-pill" data-tooltip="Securing websites against unauthorized access, exploitation, and data leaks.">Web Security</span>
+                                <span class="skill-node-pill" data-tooltip="Open Source Intelligence: Gathering public intelligence for security recon.">OSINT</span>
+                            </div>
+                        </div>
+
+                        <!-- Branch 2: Networking & Reconnaissance -->
+                        <div class="skill-branch">
+                            <div class="skill-branch-title"><i class="fa-solid fa-network-wired"></i> Networking &amp; Recon</div>
+                            <div class="skill-pills-grid">
+                                <span class="skill-node-pill" data-tooltip="Foundational networking suite governing internet data communication.">TCP/IP</span>
+                                <span class="skill-node-pill" data-tooltip="Web protocols for transferring encrypted &amp; unencrypted web page data.">HTTP / HTTPS</span>
+                                <span class="skill-node-pill" data-tooltip="Probing server ports to identify active hosts, open services, and entry points.">Port Scanning</span>
+                                <span class="skill-node-pill" data-tooltip="Scanning target networks to discover open ports, running services, and OS types.">Nmap Service Enum</span>
+                                <span class="skill-node-pill" data-tooltip="Capturing and analyzing live network packet traffic in real time.">Wireshark Analysis</span>
+                                <span class="skill-node-pill" data-tooltip="Dividing IP networks into smaller subnetworks to improve security &amp; traffic.">Subnetting</span>
+                            </div>
+                        </div>
+
+                        <!-- Branch 3: Tools & Programming -->
+                        <div class="skill-branch">
+                            <div class="skill-branch-title"><i class="fa-solid fa-terminal"></i> Security Tools &amp; OS</div>
+                            <div class="skill-pills-grid">
+                                <span class="skill-node-pill" data-tooltip="High-level programming language used to build automated security &amp; exploit scripts.">Python 3</span>
+                                <span class="skill-node-pill" data-tooltip="Command Line Interface for running Linux security operations efficiently.">Linux CLI</span>
+                                <span class="skill-node-pill" data-tooltip="Writing shell scripts to automate security scans and system administration tasks.">Bash Scripting</span>
+                                <span class="skill-node-pill" data-tooltip="Web security testing platform for intercepting and inspecting HTTP requests.">Burp Suite</span>
+                                <span class="skill-node-pill" data-tooltip="Debian Linux distribution packed with ethical hacking &amp; security tools.">Kali Linux</span>
+                                <span class="skill-node-pill" data-tooltip="Penetration testing framework for executing exploits against vulnerable targets.">Metasploit</span>
+                                <span class="skill-node-pill" data-tooltip="Search engine for finding internet-connected servers and open ports.">Shodan</span>
+                                <span class="skill-node-pill" data-tooltip="Distributed version control platform for managing security code repos.">Git / GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Tab: School & Colleges -->
+            <div class="tab-contents" id="education-tab">
+                <ul>
+                    <li><span>Schooling</span><br>Bhashyam Public School, Chimakurthy</li>
+                    <li><span>Diploma</span><br>Diploma in Mechanical Engineering (Completed)</li>
+                    <li><span>Bachelor of Technology (B.Tech)</span><br>B.Tech in Mechanical Engineering (Currently Pursuing)</li>
+                </ul>
+            </div>
+
+            <!-- Experience Tab -->
+            <div class="tab-contents" id="experience-tab">
+                <ul>
+                    <li><span>Web Application Security Labs</span><br>Hands-on practice identifying XSS, SQLi, CSRF, and IDOR vulnerabilities in safe lab environments.</li>
+                    <li><span>Burp Suite &amp; Request Interception</span><br>Intercepting, modifying, and inspecting HTTP requests and responses.</li>
+                    <li><span>Network Enumeration &amp; Scanning</span><br>Scanning ports, identifying open services, and drafting security finding reports.</li>
+                    <li><span>TryHackMe</span><br>Actively completing Pre-Security and Jr. Penetration Tester paths.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="portfolio">
+    <div class="container">
+        <h2 class="sub-title">Projects</h2>
+
+        <!-- The 3 Interactive Working Category Blocks -->
+        <div id="dynamic-category-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;"></div>
+    </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+    <div class="container">
+        <h2 class="sub-title">Services</h2>
+        <div class="services-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+
+            <div class="service-card">
+                <i class="fa-solid fa-network-wired service-icon" aria-hidden="true"></i>
+                <h3>Network Penetration Testing</h3>
+                <p>Enumerating network infrastructure, open ports, outdated service versions, and identifying security weaknesses to prevent network breaches.</p>
+                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-shield-halved service-icon" aria-hidden="true"></i>
+                <h3>Web Application Penetration Testing</h3>
+                <p>Auditing web applications against OWASP Top 10 risks including SQL Injection, XSS, CSRF, IDOR, and Broken Authentication flaws.</p>
+                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-mobile-screen-button service-icon" aria-hidden="true"></i>
+                <h3>Mobile Application Security Testing</h3>
+                <p>Assessing mobile application traffic, API endpoints, storage security, and authentication mechanisms to ensure robust mobile protection.</p>
+                <a href="#contact" class="learn-link">Talk to me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+        </div>
+        <a href="services.html" class="btn" style="margin-top: 30px;">See All Services <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h2 class="sub-title">Contact Me</h2>
+                <p class="contact-desc">I am actively looking for a Cybersecurity Internship. If you have an opportunity, a question, or just want to connect — feel free to reach out!</p>
+                <p class="contact-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i> omanideep741@gmail.com</p>
+                <p class="contact-item"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 7993652726</p>
+                <div class="social-icons">
+                    <a href="https://github.com/omanideep741-max" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                    <a href="https://linkedin.com/in/manideep-reddy-19a9a4327" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                </div>
+                <a href="Manideep_Reddy_Resume.html" target="_blank" class="btn btn-primary" style="margin-top: 35px; display: inline-block;">View Resume <i class="fa-solid fa-file-lines" aria-hidden="true"></i></a>
+            </div>
+            <div class="contact-right">
+                <form name="contact-form" autocomplete="off" novalidate>
+                    <input type="text" name="Name" id="name" placeholder="Your Name" required maxlength="100">
+                    <input type="email" name="Email" id="email" placeholder="Your Email" required maxlength="150">
+                    <textarea name="Message" id="message" rows="6" placeholder="Your Message" required maxlength="2000"></textarea>
+                    <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="copyright">
+    <p>Built by Manideep Reddy &mdash; Cybersecurity Enthusiast &amp; Ethical Hacking Learner</p>
+    <p style="margin-top: 6px; font-size: 12px; opacity: 0.5;">&copy; 2025 All rights reserved.</p>
+</footer>
+
+<!-- Back to Top Button -->
+<a href="#header" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+</a>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+    'use strict';
+
+    /* ---- Sticky Navbar & Scroll Spy ---- */
+    const navbar = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section, #header');
+    const navLinks = document.querySelectorAll('#sidemenu li a');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= (sectionTop - 160)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-nav-link');
+            const href = link.getAttribute('href');
+            if (href === '#' + current || (current === 'header' && href === '#header') || (current === 'about' && href === '#skills-section')) {
+                link.classList.add('active-nav-link');
+            }
+        });
+    });
+
+    /* ---- Back to Top Button ---- */
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+
+    /* ---- Typing Animation on Hero ---- */
+    const phrases = [
+        '// Web Application Security Enthusiast',
+        '// Ethical Hacker in Training',
+        '// OWASP Top 10 Learner',
+        '// Penetration Testing Trainee'
+    ];
+    let pIndex = 0, cIndex = 0, isDeleting = false;
+    const typingEl = document.getElementById('typing-tag');
+    function typeLoop() {
+        const current = phrases[pIndex];
+        if (isDeleting) {
+            typingEl.textContent = current.substring(0, cIndex--);
+        } else {
+            typingEl.textContent = current.substring(0, cIndex++);
+        }
+        let delay = isDeleting ? 40 : 80;
+        if (!isDeleting && cIndex === current.length + 1) {
+            delay = 1800;
+            isDeleting = true;
+        } else if (isDeleting && cIndex === 0) {
+            isDeleting = false;
+            pIndex = (pIndex + 1) % phrases.length;
+            delay = 400;
+        }
+        setTimeout(typeLoop, delay);
+    }
+    typeLoop();
+
+    /* ---- Skill Bars Animation on Scroll ---- */
+    const fills = document.querySelectorAll('.skill-fill');
+    const skillObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.style.width = el.getAttribute('data-width') + '%';
+                skillObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+    fills.forEach(function (fill) { skillObserver.observe(fill); });
+
+    /* ---- Tab Switching ---- */
+    const tablinks = document.getElementsByClassName('tab-links');
+    const tabcontents = document.getElementsByClassName('tab-contents');
+    function opentab(ev, tabname) {
+        for (let link of tablinks) link.classList.remove('active-link');
+        for (let content of tabcontents) content.classList.remove('active-tab');
+        if (ev && ev.currentTarget) {
+            ev.currentTarget.classList.add('active-link');
+        } else {
+            // Find tab link matching tabname
+            const targetLink = document.querySelector(`.tab-links[onclick*="${tabname}"]`);
+            if (targetLink) targetLink.classList.add('active-link');
+        }
+        const target = document.getElementById(tabname);
+        if (target) target.classList.add('active-tab');
+    }
+
+    /* ---- Interactive Menu Button Toggle Controller ---- */
+    const sidemenu = document.getElementById('sidemenu');
+    const navMenuBtn = document.getElementById('navMenuBtn');
+
+    function toggleMenu() {
+        if (sidemenu && navMenuBtn) {
+            sidemenu.classList.toggle('active');
+            navMenuBtn.classList.toggle('active');
+        }
+    }
+
+    function closemenu() {
+        if (sidemenu) sidemenu.classList.remove('active');
+        if (navMenuBtn) navMenuBtn.classList.remove('active');
+    }
+
+    // Close menu when clicking any link inside
+    document.querySelectorAll('#sidemenu li a').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            closemenu();
+            const href = link.getAttribute('href');
+            if (href === '#skills-section') {
+                opentab(null, 'skills-tab');
+            }
+        });
+    });
+
+    // Close menu when clicking outside of navbar menu
+    document.addEventListener('click', function(e) {
+        if (sidemenu && navMenuBtn && !sidemenu.contains(e.target) && !navMenuBtn.contains(e.target)) {
+            closemenu();
+        }
+    });
+
+    /* ---- ScrollSpy: Highlight Active Nav Link on Scroll ---- */
+    const spySections = document.querySelectorAll('div#header, section#about, div#skills-section, section#portfolio, section#services, section#contact');
+    const spyNavLinks = document.querySelectorAll('#sidemenu li a');
+
+    window.addEventListener('scroll', function () {
+        let currentSectionId = 'header';
+        const scrollPosition = window.scrollY + 220;
+
+        spySections.forEach(function (sec) {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+                currentSectionId = sec.getAttribute('id');
+            }
+        });
+
+        spyNavLinks.forEach(function (link) {
+            link.classList.remove('active-nav-link');
+            const href = link.getAttribute('href');
+            if (href === '#' + currentSectionId) {
+                link.classList.add('active-nav-link');
+            }
+        });
+    });
+
+    /* ---- Contact Form Validation & AJAX Submission ---- */
+    const form = document.querySelector('form[name="contact-form"]');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!name || !email || !message) {
+                alert('Please fill in all fields before submitting.');
+                return;
+            }
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Show sending state on the button
+            const submitBtn = document.getElementById('submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            // Send AJAX POST request to FormSubmit
+            fetch('https://formsubmit.co/ajax/omanideep741@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    Name: name,
+                    Email: email,
+                    Message: message,
+                    _subject: 'New Portfolio Message from ' + name
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                if (data.success === 'true' || data.success === true) {
+                    alert('Thank you, ' + name + '! Your message has been successfully sent to my email. I will respond to you shortly.');
+                    form.reset();
+                } else {
+                    alert('Oops! Something went wrong: ' + (data.message || 'Please try again later.'));
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                alert('Connection error. Please check your internet connection or email me directly at omanideep741@gmail.com');
+                console.error('Error:', error);
+            });
+        });
+    }
+</script>
+
+<!-- ============ MODULAR PROJECT SCRIPTS ============ -->
+<!-- Load the data file first, then the main logic script -->
+<script src="js/projectsData.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

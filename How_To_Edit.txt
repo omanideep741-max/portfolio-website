@@ -1,0 +1,64 @@
+=========================================================
+      PORTFOLIO WEBSITE - HOW IT WORKS & HOW TO EDIT
+=========================================================
+
+Hi there! This file explains how your portfolio code is organized and gives you simple steps to add your own projects, text, and images later. You don't need to write complex code to make changes—just find the right lines and replace the text!
+
+---------------------------------------------------------
+1. HOW THE CODE WORKS (THE BASICS)
+---------------------------------------------------------
+Your website is made of two main files:
+- index.html: This is the "skeleton" of the website. It contains all the text, images, and links you see on the page.
+- style.css: This is the "paint" of the website. It handles all the colors, glowing effects, animations, and dark mode styling.
+
+The index.html file is divided into sections using "IDs":
+- id="header" -> The top part with your name and the background image.
+- id="about" -> The "About Me" text and your tabs (Skills, Experience, Education).
+- id="services" -> The 3 boxes describing what you do (Penetration Testing, etc.).
+- id="portfolio" -> The section showing your projects.
+- id="contact" -> The bottom part with the contact form and social media links.
+
+---------------------------------------------------------
+2. HOW TO ADD OR CHANGE PROJECTS
+---------------------------------------------------------
+To add your real projects, open the `index.html` file and look for the line that says:
+    <div id="portfolio">
+Scroll down a little until you see blocks of code that look like this:
+
+    <div class="work">
+        <img src="Wallapers/work_1.webp" alt="...">
+        <div class="layer">
+            <h3>Vulnerability Scanner Tool</h3>
+            <p>An automated Python utility... [Placeholder]</p>
+            <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+        </div>
+    </div>
+
+Here is how you change it:
+1. IMAGE: Change `Wallapers/work_1.webp` to the name of your new image (e.g., `Wallapers/my_new_project.jpg`). Make sure to put your image inside the `Wallapers` folder first!
+2. TITLE: Change `Vulnerability Scanner Tool` to your project's real name.
+3. DESCRIPTION: Change the `<p>` text to describe your project.
+4. LINK: Change `href="#"` to your GitHub link or website link (e.g., `href="https://github.com/your-link"`).
+
+If you want to add a 4th project, just copy a whole `<div class="work"> ... </div>` block and paste it right below the last one!
+
+---------------------------------------------------------
+3. HOW TO UPDATE YOUR ABOUT ME & TABS
+---------------------------------------------------------
+Open `index.html` and look for `<div id="about">`.
+
+- To change your picture: Find `<img src="Wallapers/user.png">` and change `user.png` to your new photo's name.
+- To update the Education section (which is currently blank): Find `<div class="tab-contents" id="education">` and add lines like this inside the `<ul>` tags:
+    <li><span>2023 - 2027</span><br>B.Tech in Cyber Security at Your University</li>
+
+---------------------------------------------------------
+4. HOW TO CHANGE COLORS OR STYLES
+---------------------------------------------------------
+If you ever want to change the neon purple or red colors, open `style.css` and look at the very top under `:root`. You will see:
+    --accent-primary: #b026ff; /* Neon Purple */
+    --accent-secondary: #ff003c; /* Neon Red */
+
+You can change those "#" color codes to anything you like (like #00ff00 for green), and the whole website will automatically update!
+
+=========================================================
+That's it! Take your time, make small changes, and save the file to see how it looks in your browser. Good luck with your Web Application Security portfolio!

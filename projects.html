@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manideep Reddy | Projects — Cybersecurity & Web Application Security">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Projects | Manideep Reddy</title>
+</head>
+<body>
+
+<!-- ============ STICKY NAV ============ -->
+<nav id="navbar">
+    <div class="nav-container">
+        <!-- Logo links to Home -->
+        <a href="index.html#header" class="nav-logo" aria-label="Go to home">
+            <span class="nav-logo-text">Manideep<span class="nav-logo-dot">.</span></span>
+        </a>
+
+        <!-- Seamless Blended Menu Icon Button -->
+        <button class="nav-menu-btn" id="navMenuBtn" onclick="toggleMenu()" aria-label="Toggle Navigation Menu">
+            <i class="fa-solid fa-bars" id="menuBtnIcon"></i>
+        </button>
+
+        <!-- Dropdown Navigation Links -->
+        <ul id="sidemenu">
+            <li><a href="index.html#header"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="index.html#about"><i class="fa-solid fa-user"></i> About</a></li>
+            <li><a href="index.html#skills-section"><i class="fa-solid fa-code"></i> Skills</a></li>
+            <li><a href="projects.html" class="active-nav-link"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-shield-halved"></i> Services</a></li>
+            <li><a href="index.html#contact"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title">// Projects</h1>
+        <p class="page-desc">A detailed showcase of my security tools, vulnerability scanners, audits, and research projects.</p>
+    </div>
+</div>
+
+<!-- ============ PROJECTS SECTION ============ -->
+<section id="portfolio-page" style="padding: 40px 0 100px;">
+    <div class="container">
+        <!-- The 3 Interactive Working Category Blocks -->
+        <div id="dynamic-category-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;"></div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="copyright">
+    <p>Built by Manideep Reddy &mdash; Cybersecurity Enthusiast &amp; Ethical Hacking Learner</p>
+    <p style="margin-top: 6px; font-size: 12px; opacity: 0.5;">&copy; 2025 All rights reserved.</p>
+</footer>
+
+<!-- Back to Top Button -->
+<a href="#navbar" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+</a>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+    'use strict';
+
+    /* ---- Sticky Navbar on Scroll ---- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    /* ---- Back to Top Button ---- */
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+
+    /* ---- Interactive Menu Button Controller ---- */
+    const sidemenu = document.getElementById('sidemenu');
+    const navMenuBtn = document.getElementById('navMenuBtn');
+
+    function toggleMenu() {
+        if (sidemenu && navMenuBtn) {
+            sidemenu.classList.toggle('active');
+            navMenuBtn.classList.toggle('active');
+        }
+    }
+
+    function closemenu() {
+        if (sidemenu) sidemenu.classList.remove('active');
+        if (navMenuBtn) navMenuBtn.classList.remove('active');
+    }
+
+    document.querySelectorAll('#sidemenu li a').forEach(function (link) {
+        link.addEventListener('click', closemenu);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (sidemenu && navMenuBtn && !sidemenu.contains(e.target) && !navMenuBtn.contains(e.target)) {
+            closemenu();
+        }
+    });
+</script>
+
+<!-- ============ MODULAR PROJECT SCRIPTS ============ -->
+<script src="js/projectsData.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
