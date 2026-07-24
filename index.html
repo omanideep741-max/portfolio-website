@@ -463,7 +463,9 @@
                     Name: name,
                     Email: email,
                     Message: message,
-                    _subject: 'New Portfolio Message from ' + name
+                    _subject: 'New Portfolio Message from ' + name,
+                    _captcha: 'false',
+                    _template: 'table'
                 })
             })
             .then(response => response.json())

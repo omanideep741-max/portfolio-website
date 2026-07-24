@@ -2,10 +2,22 @@
 // DYNAMIC PORTFOLIO PROJECTS & SERVICES ENGINE
 // ==========================================
 
+let activeModalId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     initProjectsSection();
     initProjectModal();
+    initHistoryModalHandler();
 });
+
+// Handle Hardware Back Button / Browser Back Button on Mobile
+function initHistoryModalHandler() {
+    window.addEventListener('popstate', (e) => {
+        if (activeModalId) {
+            closeModalSilently(activeModalId);
+        }
+    });
+}
 
 function initProjectsSection() {
     const categoriesContainer = document.getElementById('dynamic-category-cards');
@@ -65,11 +77,6 @@ function openCategoryModal(catKey) {
         modal = document.createElement('div');
         modal.id = 'projectCategoryModal';
         modal.className = 'modal-overlay';
-        modal.style.cssText = `
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
-            z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 24px;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        `;
         document.body.appendChild(modal);
     }
 
@@ -81,12 +88,12 @@ function openCategoryModal(catKey) {
         const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
         
         itemsHtml += `
-            <div style="background: #111111; border: 1px solid #242424; padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <div style="background: #111111; border: 1px solid #242424; padding: 18px; border-radius: 12px; margin-bottom: 16px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                     <i class="${item.icon}" style="color: var(--accent-primary, #FF4D00); font-size: 1.2rem;"></i>
-                    <h4 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">${item.title}</h4>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #FFFFFF; margin: 0;">${item.title}</h4>
                 </div>
-                <p style="font-size: 0.9rem; color: #9E9E9E; margin-bottom: 16px;">${item.description}</p>
+                <p style="font-size: 0.88rem; color: #9E9E9E; margin-bottom: 14px; line-height: 1.5;">${item.description}</p>
                 <a href="${item.link}" ${targetAttr} style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 700; font-size: 0.85rem; padding: 8px 18px; border-radius: 999px; text-decoration: none;">
                     ${btnText}
                 </a>
@@ -95,30 +102,25 @@ function openCategoryModal(catKey) {
     });
 
     modal.innerHTML = `
-        <div style="background: #161616; border: 1px solid var(--accent-primary, #FF4D00); max-width: 580px; width: 100%; padding: 36px; border-radius: 16px; position: relative;">
-            <button onclick="closeCategoryModal()" style="position: absolute; top: 16px; right: 20px; background: none; border: none; color: #9E9E9E; font-size: 1.8rem; cursor: pointer;">&times;</button>
+        <div class="modal-content-box">
+            <button onclick="closeCategoryModal(true)" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.08); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;" aria-label="Close Modal">&times;</button>
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                 <i class="${category.icon}" style="color: var(--accent-primary, #FF4D00); font-size: 1.5rem;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800; color: #FFFFFF;">${category.categoryTitle}</h3>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFFFFF; margin: 0;">${category.categoryTitle}</h3>
             </div>
-            <p style="color: #9E9E9E; font-size: 0.95rem; margin-bottom: 24px;">${category.description}</p>
+            <p style="color: #9E9E9E; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">${category.description}</p>
             <div>${itemsHtml}</div>
         </div>
     `;
 
-    modal.style.opacity = '1';
-    modal.style.pointerEvents = 'all';
-
-    modal.onclick = (e) => {
-        if (e.target === modal) closeCategoryModal();
-    };
+    showModal('projectCategoryModal');
 }
 
-function closeCategoryModal() {
-    const modal = document.getElementById('projectCategoryModal');
-    if (modal) {
-        modal.style.opacity = '0';
-        modal.style.pointerEvents = 'none';
+function closeCategoryModal(useHistory = true) {
+    if (useHistory && activeModalId === 'projectCategoryModal') {
+        history.back();
+    } else {
+        closeModalSilently('projectCategoryModal');
     }
 }
 
@@ -142,11 +144,6 @@ function openServiceDetailModal(serviceKey) {
         modal = document.createElement('div');
         modal.id = 'serviceDetailModal';
         modal.className = 'modal-overlay';
-        modal.style.cssText = `
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px);
-            z-index: 2500; display: flex; align-items: center; justify-content: center; padding: 20px;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        `;
         document.body.appendChild(modal);
     }
 
@@ -154,9 +151,9 @@ function openServiceDetailModal(serviceKey) {
     let stepsHtml = '';
     service.howIPerform.forEach(item => {
         stepsHtml += `
-            <div style="background: #121212; border-left: 3px solid var(--accent-primary, #FF4D00); border-radius: 8px; padding: 14px 18px; margin-bottom: 12px;">
-                <h5 style="color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">${item.step}</h5>
-                <p style="color: #CCCCCC; font-size: 0.88rem; margin: 0; line-height: 1.5;">${item.desc}</p>
+            <div style="background: #121212; border-left: 3px solid var(--accent-primary, #FF4D00); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px;">
+                <h5 style="color: var(--accent-primary, #FF4D00); font-weight: 700; font-size: 0.9rem; margin-bottom: 4px;">${item.step}</h5>
+                <p style="color: #CCCCCC; font-size: 0.85rem; margin: 0; line-height: 1.5;">${item.desc}</p>
             </div>
         `;
     });
@@ -165,8 +162,8 @@ function openServiceDetailModal(serviceKey) {
     let reqsHtml = '';
     service.requirements.forEach(req => {
         reqsHtml += `
-            <li style="margin-bottom: 8px; font-size: 0.9rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 10px;">
-                <i class="fa-solid fa-square-check" style="color: var(--accent-primary, #FF4D00); margin-top: 3px; font-size: 0.95rem;"></i>
+            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;">
+                <i class="fa-solid fa-square-check" style="color: var(--accent-primary, #FF4D00); margin-top: 2px; font-size: 0.9rem; flex-shrink: 0;"></i>
                 <span>${req}</span>
             </li>
         `;
@@ -176,8 +173,8 @@ function openServiceDetailModal(serviceKey) {
     let delivHtml = '';
     service.deliverables.forEach(d => {
         delivHtml += `
-            <li style="margin-bottom: 8px; font-size: 0.9rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 10px;">
-                <i class="fa-solid fa-circle-check" style="color: #00E676; margin-top: 3px; font-size: 0.95rem;"></i>
+            <li style="margin-bottom: 8px; font-size: 0.88rem; color: #DDDDDD; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;">
+                <i class="fa-solid fa-circle-check" style="color: #00E676; margin-top: 2px; font-size: 0.9rem; flex-shrink: 0;"></i>
                 <span>${d}</span>
             </li>
         `;
@@ -186,80 +183,107 @@ function openServiceDetailModal(serviceKey) {
     // Tools badges
     let toolsHtml = '';
     service.tools.forEach(t => {
-        toolsHtml += `<span style="background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border: 1px solid rgba(255, 77, 0, 0.3); padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin-right: 6px; margin-bottom: 6px;">${t}</span>`;
+        toolsHtml += `<span style="background: rgba(255, 77, 0, 0.12); color: var(--accent-primary, #FF4D00); border: 1px solid rgba(255, 77, 0, 0.3); padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; display: inline-block; margin-right: 6px; margin-bottom: 6px;">${t}</span>`;
     });
 
-    const isServicesPage = window.location.pathname.includes('services.html');
-    const contactHref = isServicesPage ? 'index.html#contact' : '#contact';
+    const contactHref = '#contact';
 
     modal.innerHTML = `
-        <div style="background: #181818; border: 1px solid var(--accent-primary, #FF4D00); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px; border-radius: 20px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9);">
-            <button onclick="closeServiceDetailModal()" style="position: absolute; top: 16px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;" aria-label="Close Modal">&times;</button>
+        <div class="modal-content-box">
+            <button onclick="closeServiceDetailModal(true)" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.08); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;" aria-label="Close Modal">&times;</button>
             
             <!-- Header -->
-            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                <div style="width: 52px; height: 52px; background: rgba(255, 77, 0, 0.15); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-right: 32px;">
+                <div style="width: 48px; height: 48px; background: rgba(255, 77, 0, 0.15); color: var(--accent-primary, #FF4D00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;">
                     <i class="${service.icon}"></i>
                 </div>
                 <div>
-                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #FFFFFF; margin: 0;">${service.title}</h3>
-                    <p style="color: #9E9E9E; font-size: 0.88rem; margin-top: 4px; margin-bottom: 0;">Service Specifications &amp; Scope</p>
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin: 0; line-height: 1.3;">${service.title}</h3>
+                    <p style="color: #9E9E9E; font-size: 0.82rem; margin-top: 2px; margin-bottom: 0;">Scope &amp; Methodology Specifications</p>
                 </div>
             </div>
 
-            <p style="color: #DDDDDD; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #282828;">${service.summary}</p>
+            <p style="color: #DDDDDD; font-size: 0.9rem; line-height: 1.55; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #282828;">${service.summary}</p>
 
             <!-- Section 1: How I Perform -->
-            <div style="margin-bottom: 24px;">
-                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;">
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #FFFFFF; font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-gears" style="color: var(--accent-primary, #FF4D00);"></i> How I Perform
                 </h4>
                 <div>${stepsHtml}</div>
             </div>
 
             <!-- Section 2: Requirements -->
-            <div style="margin-bottom: 24px; background: #121212; padding: 18px 20px; border-radius: 12px; border: 1px solid #282828;">
-                <h4 style="color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828;">
+                <h4 style="color: #FFFFFF; font-size: 0.98rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-list-check" style="color: var(--accent-primary, #FF4D00);"></i> Prerequisites &amp; Requirements
                 </h4>
                 <ul style="list-style: none; padding: 0; margin: 0;">${reqsHtml}</ul>
             </div>
 
             <!-- Section 3: Deliverables -->
-            <div style="margin-bottom: 24px; background: #121212; padding: 18px 20px; border-radius: 12px; border: 1px solid #282828;">
-                <h4 style="color: #FFFFFF; font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <div style="margin-bottom: 20px; background: #121212; padding: 14px 16px; border-radius: 12px; border: 1px solid #282828;">
+                <h4 style="color: #FFFFFF; font-size: 0.98rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-box-open" style="color: #00E676;"></i> Deliverables Provided
                 </h4>
                 <ul style="list-style: none; padding: 0; margin: 0;">${delivHtml}</ul>
             </div>
 
             <!-- Section 4: Tools -->
-            <div style="margin-bottom: 28px;">
-                <h4 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 10px;">Tools &amp; Frameworks Utilized:</h4>
+            <div style="margin-bottom: 22px;">
+                <h4 style="color: #FFFFFF; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">Tools &amp; Frameworks Utilized:</h4>
                 <div>${toolsHtml}</div>
             </div>
 
             <!-- CTA Button -->
-            <div style="text-align: center; border-top: 1px solid #282828; padding-top: 20px;">
-                <a href="${contactHref}" onclick="closeServiceDetailModal()" style="display: inline-flex; align-items: center; gap: 10px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 800; font-size: 0.95rem; padding: 12px 28px; border-radius: 999px; text-decoration: none;">
+            <div style="text-align: center; border-top: 1px solid #282828; padding-top: 16px;">
+                <a href="${contactHref}" onclick="closeServiceDetailModal(true)" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--accent-primary, #FF4D00); color: #FFFFFF; font-weight: 800; font-size: 0.9rem; padding: 12px 24px; border-radius: 999px; text-decoration: none; width: 100%; max-width: 320px;">
                     Request Service / Contact Me <i class="fa-solid fa-paper-plane"></i>
                 </a>
             </div>
         </div>
     `;
 
+    showModal('serviceDetailModal');
+}
+
+function closeServiceDetailModal(useHistory = true) {
+    if (useHistory && activeModalId === 'serviceDetailModal') {
+        history.back();
+    } else {
+        closeModalSilently('serviceDetailModal');
+    }
+}
+
+// Helper: Show Modal & Handle History State
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    activeModalId = modalId;
+    history.pushState({ modalId: modalId }, '');
+
     modal.style.opacity = '1';
     modal.style.pointerEvents = 'all';
+    document.body.style.overflow = 'hidden';
 
     modal.onclick = (e) => {
-        if (e.target === modal) closeServiceDetailModal();
+        if (e.target === modal) {
+            if (modalId === 'serviceDetailModal') closeServiceDetailModal(true);
+            else if (modalId === 'projectCategoryModal') closeCategoryModal(true);
+        }
     };
 }
 
-function closeServiceDetailModal() {
-    const modal = document.getElementById('serviceDetailModal');
+// Helper: Close Modal without history.back recursion
+function closeModalSilently(modalId) {
+    const modal = document.getElementById(modalId);
     if (modal) {
         modal.style.opacity = '0';
         modal.style.pointerEvents = 'none';
+    }
+    document.body.style.overflow = '';
+    if (activeModalId === modalId) {
+        activeModalId = null;
     }
 }
