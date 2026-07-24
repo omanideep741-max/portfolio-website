@@ -479,7 +479,7 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
 
-                if (response.status === 200 && json.success) {
+                if (json.success) {
                     if (result) {
                         result.style.color = '#00E676';
                         result.innerHTML = 'Thank you! Your message has been sent successfully.';
@@ -488,35 +488,21 @@
                     }
                     form.reset();
                 } else {
-                    // Fallback to FormSubmit AJAX POST
-                    fetch('https://formsubmit.co/ajax/omanideep741@gmail.com', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify({ Name: name, Email: email, Message: message, _captcha: 'false' })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success === 'true' || data.success === true) {
-                            if (result) {
-                                result.style.color = '#00E676';
-                                result.innerHTML = 'Thank you! Message delivered successfully.';
-                            } else alert('Thank you! Message delivered successfully.');
-                            form.reset();
-                        } else {
-                            if (result) {
-                                result.style.color = '#FF4D00';
-                                result.innerHTML = json.message || 'Please check your Web3Forms access key.';
-                            }
-                        }
-                    })
-                    .catch(() => {
-                        window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
-                    });
+                    if (result) {
+                        result.style.color = '#FF4D00';
+                        result.innerHTML = json.message || 'Something went wrong. Please try again.';
+                    } else {
+                        alert(json.message || 'Something went wrong. Please try again.');
+                    }
                 }
             })
             .catch(error => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
+                if (result) {
+                    result.style.color = '#FF4D00';
+                    result.innerHTML = 'Connection error. Opening your email application instead...';
+                }
                 window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
             })
             .then(function() {
