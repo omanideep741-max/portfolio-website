@@ -452,6 +452,15 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
 
+            // Check if testing locally via file:// protocol
+            if (window.location.protocol === 'file:') {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                alert('Local File Notice: FormSubmit requires an active Web Server (like your live GitHub Pages link). For local testing, opening your email application instead.');
+                window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+                return;
+            }
+
             // Send AJAX POST request to FormSubmit
             fetch('https://formsubmit.co/ajax/omanideep741@gmail.com', {
                 method: 'POST',
@@ -482,7 +491,8 @@
             .catch(error => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
-                alert('Connection error. Please check your internet connection or email me directly at omanideep741@gmail.com');
+                alert('Connection error. Opening direct email mailto link...');
+                window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
                 console.error('Error:', error);
             });
         });
