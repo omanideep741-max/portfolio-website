@@ -244,11 +244,15 @@
                 <a href="Manideep_Reddy_Resume.html" target="_blank" class="btn btn-primary" style="margin-top: 35px; display: inline-block;">View Resume <i class="fa-solid fa-file-lines" aria-hidden="true"></i></a>
             </div>
             <div class="contact-right">
-                <form name="contact-form" autocomplete="off" novalidate>
-                    <input type="text" name="Name" id="name" placeholder="Enter name" required maxlength="100">
-                    <input type="email" name="Email" id="email" placeholder="Enter email" required maxlength="150">
-                    <textarea name="Message" id="message" rows="6" placeholder="Type message" required maxlength="2000"></textarea>
+                <form name="contact-form" autocomplete="off">
+                    <input type="hidden" name="access_key" id="accessKey" value="c3b8d5ac-7731-42cd-883f-e6e0af3a45a0">
+                    <input type="hidden" name="subject" value="New Portfolio Message from Visitor">
+                    <input type="hidden" name="from_name" value="Cybersecurity Portfolio">
+                    <input type="text" name="name" id="name" placeholder="Enter name" required maxlength="100">
+                    <input type="email" name="email" id="email" placeholder="Enter email" required maxlength="150">
+                    <textarea name="message" id="message" rows="6" placeholder="Type message" required maxlength="2000"></textarea>
                     <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+                    <div id="form-result" style="margin-top: 15px; font-weight: 600; font-size: 0.9rem; text-align: center;"></div>
                 </form>
             </div>
         </div>
@@ -427,73 +431,98 @@
         });
     });
 
-    /* ---- Contact Form Validation & AJAX Submission ---- */
-    const form = document.querySelector('form[name="contact-form"]');
+    // Contact Form Handler (GreatStack Web3Forms / FormSubmit Standard)
+    const form = document.forms['contact-form'];
+    const result = document.getElementById('form-result');
+
     if (form) {
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             
             if (!name || !email || !message) {
-                alert('Please fill in all fields before submitting.');
+                if (result) {
+                    result.style.color = '#FF4D00';
+                    result.innerHTML = 'Please fill in all fields before submitting.';
+                }
                 return;
             }
             if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
+                if (result) {
+                    result.style.color = '#FF4D00';
+                    result.innerHTML = 'Please enter a valid email address.';
+                }
                 return;
             }
 
-            // Show sending state on the button
             const submitBtn = document.getElementById('submit-btn');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
-
-            // Check if testing locally via file:// protocol
-            if (window.location.protocol === 'file:') {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-                alert('Local File Notice: FormSubmit requires an active Web Server (like your live GitHub Pages link). For local testing, opening your email application instead.');
-                window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
-                return;
+            if (result) {
+                result.style.color = 'var(--text-muted, #9E9E9E)';
+                result.innerHTML = 'Sending message...';
             }
 
-            // Send AJAX POST request to FormSubmit
-            fetch('https://formsubmit.co/ajax/omanideep741@gmail.com', {
+            const formData = new FormData(form);
+
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    Name: name,
-                    Email: email,
-                    Message: message,
-                    _subject: 'New Portfolio Message from ' + name,
-                    _captcha: 'false',
-                    _template: 'table'
-                })
+                body: formData
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(async (response) => {
+                let json = await response.json();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
-                if (data.success === 'true' || data.success === true) {
-                    alert('Thank you, ' + name + '! Your message has been successfully sent to my email. I will respond to you shortly.');
+
+                if (response.status === 200 && json.success) {
+                    if (result) {
+                        result.style.color = '#00E676';
+                        result.innerHTML = 'Thank you! Your message has been sent successfully.';
+                    } else {
+                        alert('Thank you! Your message has been sent successfully.');
+                    }
                     form.reset();
                 } else {
-                    alert('Oops! Something went wrong: ' + (data.message || 'Please try again later.'));
+                    // Fallback to FormSubmit AJAX POST
+                    fetch('https://formsubmit.co/ajax/omanideep741@gmail.com', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify({ Name: name, Email: email, Message: message, _captcha: 'false' })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success === 'true' || data.success === true) {
+                            if (result) {
+                                result.style.color = '#00E676';
+                                result.innerHTML = 'Thank you! Message delivered successfully.';
+                            } else alert('Thank you! Message delivered successfully.');
+                            form.reset();
+                        } else {
+                            if (result) {
+                                result.style.color = '#FF4D00';
+                                result.innerHTML = json.message || 'Please check your Web3Forms access key.';
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+                    });
                 }
             })
             .catch(error => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
-                alert('Connection error. Opening direct email mailto link...');
                 window.location.href = `mailto:omanideep741@gmail.com?subject=Portfolio Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
-                console.error('Error:', error);
+            })
+            .then(function() {
+                setTimeout(() => {
+                    if (result) result.innerHTML = '';
+                }, 6000);
             });
         });
     }
