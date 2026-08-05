@@ -4,7 +4,7 @@
 📧 omanideep741@gmail.com | 📱 +91-7993652726
 🔗 **LinkedIn:** [linkedin.com/in/manideep-reddy-19a9a4327](https://linkedin.com/in/manideep-reddy-19a9a4327)
 🐙 **GitHub:** [github.com/omanideep741-max](https://github.com/omanideep741-max)
-🌐 **Portfolio:** [github.com/omanideep741-max/Portfolio](https://github.com/omanideep741-max/Portfolio) (Detailed Projects & About Me)
+🌐 **Portfolio:** [omanideep741-max.github.io/portfolio-website](https://omanideep741-max.github.io/portfolio-website/) (Detailed Projects & About Me)
 
 ---
 
