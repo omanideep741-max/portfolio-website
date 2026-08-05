@@ -10,10 +10,10 @@ const projectsData = {
         icon: "fa-solid fa-network-wired",
         items: [
             {
-                title: "Network Enumeration & Scanning Tool",
-                description: "Nmap port scanning utility, service version detection, and OS fingerprinting tool for security auditing.",
+                title: "Automated Network Vulnerability Scanner",
+                description: "Python CLI security scanner that automates Nmap host discovery, service version detection, NSE scripts, XML parsing, vulnerability severity classification, and interactive HTML & terminal dashboard reporting.",
                 icon: "fa-solid fa-network-wired",
-                link: "https://github.com/omanideep741-max"
+                link: "https://github.com/omanideep741-max/network-vulnerability-scanner"
             }
         ]
     },

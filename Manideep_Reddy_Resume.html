@@ -108,6 +108,30 @@
             display: block;
             color: #111;
         }
+        /* Mobile Responsive Styles */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px 10px;
+            }
+            .resume-container {
+                padding: 24px 18px;
+                border-radius: 6px;
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 24px;
+            }
+            header h2 {
+                font-size: 14px;
+            }
+        }
         /* Print Styles */
         @media print {
             body {
@@ -118,10 +142,24 @@
                 box-shadow: none;
                 padding: 0;
             }
+            .no-print {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
+
+<div class="no-print" style="max-width: 800px; margin: 0 auto 20px auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; background: #ffffff; padding: 14px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+    <a href="index.html" style="color: #475569; text-decoration: none; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+        Back to Portfolio
+    </a>
+    <button onclick="window.print()" style="background: #b026ff; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s ease;">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm15 6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2zM5 11h6v3H5v-3z"/></svg>
+        Download / Save as PDF
+    </button>
+</div>
 
 <div class="resume-container">
     <header>
@@ -200,10 +238,11 @@
             </ul>
         </div>
         <div class="project-item">
-            <h4>Network Scanning and Enumeration</h4>
+            <h4>Automated Network Vulnerability Scanner (Python &amp; Nmap)</h4>
             <ul>
-                <li>Conducted network discovery and service identification using Nmap.</li>
-                <li>Enumerated open ports and created structured security findings reports.</li>
+                <li>Developed a Python CLI security tool automating Nmap host discovery, service version detection, OS fingerprinting, and NSE script scans.</li>
+                <li>Implemented XML parsing engine to extract scan results, classify vulnerability severities, and generate interactive HTML &amp; terminal reports.</li>
+                <li>Built modular scan profiles, robust input validation, and automated unit tests for security auditing.</li>
             </ul>
         </div>
         <div class="project-item">
@@ -223,7 +262,14 @@
             <li><strong>Cisco</strong> – Introduction to Cyber Security</li>
         </ul>
     </section>
-</div>
-
+<script>
+    if (window.location.search.includes('download=true') || window.location.search.includes('print=true')) {
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                window.print();
+            }, 400);
+        });
+    }
+</script>
 </body>
 </html>

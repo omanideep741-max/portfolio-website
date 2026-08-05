@@ -59,9 +59,10 @@ Passionate Cybersecurity enthusiast and Mechanical Engineering diploma graduate 
 - Utilized Burp Suite to intercept and inspect HTTP requests and responses.
 - Documented findings and proposed remediation recommendations.
 
-**Network Scanning and Enumeration**
-- Conducted network discovery and service identification using Nmap.
-- Enumerated open ports, identified running services, and created structured security findings reports.
+**Automated Network Vulnerability Scanner (Python & Nmap)**
+- Built a Python CLI security scanner automating Nmap network discovery, service version detection, OS fingerprinting, and NSE script scans.
+- Developed an XML parsing engine to extract scan results, classify vulnerability severity levels, and generate interactive HTML and terminal dashboard reports.
+- Created modular scan profiles, robust input validation, and automated unit tests for efficient security auditing.
 
 **Packet Capture Analysis**
 - Analyzed network traffic using Wireshark to investigate protocols and communication patterns.
